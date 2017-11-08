@@ -50,8 +50,8 @@
 		A9EF573A18F37C9400C2A546 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9EF573818F37C9400C2A546 /* InfoPlist.strings */; };
 		A9EF573C18F37C9400C2A546 /* TeamTapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EF573B18F37C9400C2A546 /* TeamTapTests.m */; };
 		A9EF574618F37C9F00C2A546 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9EF574518F37C9F00C2A546 /* AudioToolbox.framework */; };
-		C030095B46484466B2F7D55E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E4C92635A4BE89525F7C0 /* libPods.a */; };
 		CEE84A271FAC8A1000CFB5B9 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE84A261FAC8A1000CFB5B9 /* SafariServices.framework */; };
+		CEEFF8DC1FB2F88D002665DE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEFF8DB1FB2F88D002665DE /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +136,7 @@
 		A9EF574518F37C9F00C2A546 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C1A7CCD383B2400CB965B0B1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		CEE84A261FAC8A1000CFB5B9 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		CEEFF8DB1FB2F88D002665DE /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +151,6 @@
 				A9EF571318F37C9400C2A546 /* CoreGraphics.framework in Frameworks */,
 				A9EF571518F37C9400C2A546 /* UIKit.framework in Frameworks */,
 				A9EF571118F37C9400C2A546 /* Foundation.framework in Frameworks */,
-				C030095B46484466B2F7D55E /* libPods.a in Frameworks */,
 				281E07BD4AD9D5C8AC7F43F9 /* Pods_teamtap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +410,7 @@
 				A9EF571918F37C9400C2A546 /* InfoPlist.strings */,
 				A9EF571C18F37C9400C2A546 /* main.m */,
 				A9EF571E18F37C9400C2A546 /* teamtap-Prefix.pch */,
+				CEEFF8DB1FB2F88D002665DE /* Launch Screen.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -521,6 +522,7 @@
 				A9B97DED18F3C73C00166B63 /* OpenSans-Regular.ttf in Resources */,
 				A9EF572918F37C9400C2A546 /* Images.xcassets in Resources */,
 				A9B97DEC18F3C73C00166B63 /* BebasNeue-Regular.otf in Resources */,
+				CEEFF8DC1FB2F88D002665DE /* Launch Screen.storyboard in Resources */,
 				A9EF571B18F37C9400C2A546 /* InfoPlist.strings in Resources */,
 				A919A55119166E7300C5F73A /* Main35.storyboard in Resources */,
 				A9EF572418F37C9400C2A546 /* Main.storyboard in Resources */,

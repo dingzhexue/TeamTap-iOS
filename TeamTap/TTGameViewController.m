@@ -13,7 +13,10 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+Additions.h"
 
-@interface TTGameViewController()
+@interface TTGameViewController(){
+    int hours, minutes, seconds;
+    int secondsLeft;
+}
 - (void)getGame;
 - (void)postTapPayloadWithTimestamp:(NSString *)timestamp;
 @end
@@ -140,9 +143,6 @@
 }
 
 #pragma mark - Countdown Timer
-
-int hours, minutes, seconds;
-int secondsLeft;
 
 - (void)updateCounter:(NSTimer *)theTimer
 {
