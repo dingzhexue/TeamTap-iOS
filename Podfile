@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '11.0'
 use_frameworks!
 target 'teamtap' do
    pod 'AFNetworking', '2.5.0'
