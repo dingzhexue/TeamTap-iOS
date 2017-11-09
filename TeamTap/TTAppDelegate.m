@@ -26,7 +26,6 @@
 //            [self.window setRootViewController:initViewController];
 //        }
 //    }
-    
     return YES;
 }
 							

@@ -54,10 +54,14 @@
 
 #pragma mark - Navigation
 
+- (NSInteger)extracted {
+    return [TTAPIClient sharedClient].selectedGameId;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     TTTeamViewController *controller = [segue destinationViewController];
-    controller.gameID = [TTAPIClient sharedClient].selectedGameId;
+    controller.gameID = [self extracted];
 }
 
 @end

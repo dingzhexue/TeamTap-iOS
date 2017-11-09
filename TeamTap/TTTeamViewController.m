@@ -68,10 +68,14 @@
 
 }
 
+static void extracted(TTTeamViewController *object) {
+    [object getGame];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     if ([TTAPIClient sharedClient].selectedGameId == self.gameID) {
-        [self getGame];
+        extracted(self);
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
