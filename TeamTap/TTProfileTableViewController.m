@@ -33,6 +33,7 @@
     [super viewDidLoad];
     [self getProfile];
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    [self.tableView setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated

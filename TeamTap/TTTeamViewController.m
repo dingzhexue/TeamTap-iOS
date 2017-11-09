@@ -15,6 +15,7 @@
 #import "NSDictionary+Additions.h"
 
 @interface TTTeamViewController()
+
 - (void)getGame;
 - (void)checkGameStart;
 - (UIImage *)convertImageToGrayScale:(UIImage *)image;
@@ -160,9 +161,10 @@ int secondsLeft;
         [self.teamaButton setImage:self.originalTeamaImage forState:UIControlStateNormal];
     }
     
-    UIImage *newImage = [self convertImageToGrayScale:self.originalTeambImage];
+//    UIImage *newImage = [self convertImageToGrayScale:self.originalTeambImage];
+    UIImage *newImage = [UIImage imageNamed:@"grey8.png"];
     [self.teambButton setImage:newImage forState:UIControlStateNormal];
-
+    
     self.selectedTeam = @"a";
     self.selectedTeamID = [self.game[@"teamaID"] intValue];
 }
@@ -172,7 +174,8 @@ int secondsLeft;
         [self.teambButton setImage:self.originalTeambImage forState:UIControlStateNormal];
     }
     
-    UIImage *newImage = [self convertImageToGrayScale:self.originalTeamaImage];
+//    UIImage *newImage = [self convertImageToGrayScale:self.originalTeamaImage];
+    UIImage *newImage = [UIImage imageNamed:@"grey7.png"];
     [self.teamaButton setImage:newImage forState:UIControlStateNormal];
     
     self.selectedTeam = @"b";
@@ -185,7 +188,7 @@ int secondsLeft;
     CGFloat actualHeight = image.size.height;
     CGSize imageSize = CGSizeMake(actualWidth, actualHeight);
     CGRect imageRect = CGRectMake(0, 0, actualWidth, actualHeight);
-    UIColor *fillColor = [UIColor blackColor];
+    UIColor *fillColor = [UIColor darkGrayColor];
 
     UIGraphicsBeginImageContextWithOptions(imageSize, YES, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -193,12 +196,12 @@ int secondsLeft;
     CGContextFillRect(context, imageRect);
     CGImageRef blackImage = CGBitmapContextCreateImage(context);
     CGContextRelease(context);
-    
+
     context = CGBitmapContextCreate(nil, actualWidth, actualHeight, 8, 0, nil, kCGImageAlphaOnly);
     CGContextDrawImage(context, imageRect, [image CGImage]);
     CGImageRef mask = CGBitmapContextCreateImage(context);
     CGContextRelease(context);
-    
+
     UIImage *outlineImage = [UIImage imageWithCGImage:CGImageCreateWithMask(blackImage, mask) scale:1 orientation:image.imageOrientation];
     CGImageRelease(blackImage);
     CGImageRelease(mask);

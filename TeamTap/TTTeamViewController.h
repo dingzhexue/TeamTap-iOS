@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TTTeamViewController : UIViewController
+@interface TTTeamViewController : UIViewController{
+ 
+}
 
 @property (nonatomic, strong) NSDictionary *game;
 
@@ -37,5 +39,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *charityImage;
 @property (weak, nonatomic) IBOutlet UILabel *donationBanner;
 @property (weak, nonatomic) IBOutlet UIImageView *gamebgImage;
+
+
 
 @end

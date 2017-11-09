@@ -154,9 +154,9 @@
         tempLabel.font = [UIFont fontWithName:@"OpenSans" size:12.0f];
         tempLabel.numberOfLines = 0;
         [tempLabel sizeToFit];
-        return 350 + tempLabel.frame.size.height;
+        return 200 + tempLabel.frame.size.height;
     } else {
-        return 315;
+        return 400;
     }
 }
 
