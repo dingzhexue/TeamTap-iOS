@@ -135,13 +135,13 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
     
     //expandedCells is a mutable set declared in your interface section or private class extension
-    if ([self.expandedCells containsObject:indexPath]) {
-        [self.expandedCells removeObject:indexPath];
-    } else {
-        [self.expandedCells removeAllObjects];
-        [self.expandedCells addObject:indexPath];
-    }
-    
+//    if ([self.expandedCells containsObject:indexPath]) {
+//        [self.expandedCells removeObject:indexPath];
+//    } else {
+//        [self.expandedCells removeAllObjects];
+//        [self.expandedCells addObject:indexPath];
+//    }
+//
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
 }
@@ -151,7 +151,7 @@
     if ([self.expandedCells containsObject:indexPath]) {
         UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 326, 277, 30)];
         tempLabel.text = self.events[indexPath.row][@"info"];
-        tempLabel.font = [UIFont fontWithName:@"OpenSans" size:12.0f];
+        tempLabel.font = [UIFont fontWithName:@"OpenSans" size:10.0f];
         tempLabel.numberOfLines = 0;
         [tempLabel sizeToFit];
         return 200 + tempLabel.frame.size.height;
