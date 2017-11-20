@@ -38,6 +38,8 @@
     
     // Scroll beyond taller tab bar
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 16, 0);
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 400;
     
 }
 
@@ -91,21 +93,12 @@
     cell.charityLabel.text = [[NSString stringWithString:event[@"charity"]] uppercaseString];
     cell.tapsLabel.text = [NSString stringWithFormat:@"%@", event[@"taps"]];
     cell.eventBanner.backgroundColor = [[TTAPIClient sharedClient] primaryColour];
-    
-    cell.infoLabel.hidden = YES;
+    cell.infoLabel.text = event[@"info"];
+    cell.infoLabel.font = [UIFont fontWithName:@"OpenSans" size:cell.infoLabel.font.pointSize];
     
     if ([cell.contentView viewWithTag:12346]) {
         [[cell.contentView viewWithTag:12346] removeFromSuperview];
     }
-    
-    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 326, 277, 30)];
-    contentLabel.tag = 12346;
-    contentLabel.font = [UIFont fontWithName:@"OpenSans" size:cell.infoLabel.font.pointSize];
-    contentLabel.text = event[@"info"];
-    contentLabel.numberOfLines = 0;
-    [contentLabel sizeToFit];
-    [cell.contentView addSubview:contentLabel];
-
     
     cell.eventImage.image = nil;
     [cell.eventImage cancelImageRequestOperation];
@@ -113,7 +106,10 @@
     NSURL *imageURL = [NSURL URLWithString:[event objectForKeyNotNull:@"imageURL"]];
     
     if (imageURL) {
+        cell.eventImage.hidden = false;
         [cell.eventImage setImageWithURL:imageURL];
+    } else {
+        cell.eventImage.hidden = true;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -135,30 +131,30 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
     
     //expandedCells is a mutable set declared in your interface section or private class extension
-//    if ([self.expandedCells containsObject:indexPath]) {
-//        [self.expandedCells removeObject:indexPath];
-//    } else {
-//        [self.expandedCells removeAllObjects];
-//        [self.expandedCells addObject:indexPath];
-//    }
-//
+    if ([self.expandedCells containsObject:indexPath]) {
+        [self.expandedCells removeObject:indexPath];
+    } else {
+        [self.expandedCells removeAllObjects];
+        [self.expandedCells addObject:indexPath];
+    }
+    
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([self.expandedCells containsObject:indexPath]) {
-        UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 326, 277, 30)];
-        tempLabel.text = self.events[indexPath.row][@"info"];
-        tempLabel.font = [UIFont fontWithName:@"OpenSans" size:10.0f];
-        tempLabel.numberOfLines = 0;
-        [tempLabel sizeToFit];
-        return 200 + tempLabel.frame.size.height;
-    } else {
-        return 400;
-    }
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if ([self.expandedCells containsObject:indexPath]) {
+//        UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 326, 277, 30)];
+//        tempLabel.text = self.events[indexPath.row][@"info"];
+//        tempLabel.font = [UIFont fontWithName:@"OpenSans" size:12.0f];
+//        tempLabel.numberOfLines = 0;
+//        [tempLabel sizeToFit];
+//        return 200 + tempLabel.frame.size.height;
+//    } else {
+//        return 400;
+//    }
+//}
 
 #pragma mark - Private
 

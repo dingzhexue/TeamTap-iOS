@@ -485,7 +485,8 @@
 				ORGANIZATIONNAME = "Audio and Pixels Pty. Limited";
 				TargetAttributes = {
 					A9EF570C18F37C9400C2A546 = {
-						DevelopmentTeam = 9SHMYS5AVQ;
+						DevelopmentTeam = T978RQ965E;
+						ProvisioningStyle = Automatic;
 					};
 					A9EF572D18F37C9400C2A546 = {
 						TestTargetID = A9EF570C18F37C9400C2A546;
@@ -792,14 +793,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Cox (XDDT2S4JM3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Cox (XDDT2S4JM3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T978RQ965E;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamTap/teamtap-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/TeamTap/teamtap-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.exploreengage.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.elevator.teamtapapp;
 				PRODUCT_NAME = teamtap;
-				PROVISIONING_PROFILE = "60B7D970-0761-4E13-AF08-CA84255CDAA0";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -812,14 +816,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Cox (XDDT2S4JM3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Cox (XDDT2S4JM3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T978RQ965E;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamTap/teamtap-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/TeamTap/teamtap-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.exploreengage.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.elevator.teamtapapp;
 				PRODUCT_NAME = teamtap;
-				PROVISIONING_PROFILE = "A7B95B2F-433A-4AFA-A9B3-F7A8E2472AA9";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

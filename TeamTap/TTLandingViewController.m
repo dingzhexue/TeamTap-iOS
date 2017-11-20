@@ -68,4 +68,9 @@
     [self presentViewController:safariVC animated:true completion:nil];
 }
 
+- (IBAction)howToPlay:(id)sender {
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:@"http://www.teamtap.com.au/the-game.html"]];
+    [self presentViewController:safariVC animated:true completion:nil];
+}
+
 @end
