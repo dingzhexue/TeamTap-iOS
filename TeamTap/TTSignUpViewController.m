@@ -161,10 +161,8 @@
     if (errorCode == 401) {
         errorMessage = @"Incorrect email or password.";
         return errorMessage;
-    } else if (errorCode == 400) {
-        return message;
     } else {
-        return errorMessage;
+        return message;
     }
     
 }
