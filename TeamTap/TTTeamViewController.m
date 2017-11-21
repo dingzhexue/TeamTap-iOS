@@ -19,7 +19,6 @@
 - (void)getGame;
 - (void)checkGameStart;
 - (UIImage *)convertImageToGrayScale:(UIImage *)image;
-- (UIImage *) convertToGreyscale:(UIImage *)i;
 
 @end
 
@@ -163,7 +162,7 @@ int secondsLeft;
         [self.teamaButton setImage:self.originalTeamaImage forState:UIControlStateNormal];
     }
     
-    UIImage *newImage = [self convertToGreyscale:self.originalTeambImage];
+    UIImage *newImage = [self convertImageToGrayScale:self.originalTeambImage];
 //    UIImage *newImage = [UIImage imageNamed:@"grey8.png"];
     [self.teambButton setImage:newImage forState:UIControlStateNormal];
     
@@ -176,7 +175,7 @@ int secondsLeft;
         [self.teambButton setImage:self.originalTeambImage forState:UIControlStateNormal];
     }
     
-    UIImage *newImage = [self convertToGreyscale:self.originalTeamaImage];
+    UIImage *newImage = [self convertImageToGrayScale:self.originalTeamaImage];
 //    UIImage *newImage = [UIImage imageNamed:@"grey7.png"];
     [self.teamaButton setImage:newImage forState:UIControlStateNormal];
     
@@ -184,94 +183,81 @@ int secondsLeft;
     self.selectedTeamID = [self.game[@"teambID"] intValue];
 }
 
+//- (UIImage *)convertImageToGrayScale:(UIImage *)image
+//{
+//    CGFloat actualWidth = image.size.width;
+//    CGFloat actualHeight = image.size.height;
+//    CGSize imageSize = CGSizeMake(actualWidth, actualHeight);
+//    CGRect imageRect = CGRectMake(0, 0, actualWidth, actualHeight);
+//    UIColor *fillColor = [UIColor darkGrayColor];
+//
+//    UIGraphicsBeginImageContextWithOptions(imageSize, YES, 0);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    [fillColor setFill];
+//    CGContextFillRect(context, imageRect);
+//    CGImageRef blackImage = CGBitmapContextCreateImage(context);
+//    CGContextRelease(context);
+//
+//    context = CGBitmapContextCreate(nil, actualWidth, actualHeight, 8, 0, nil, kCGImageAlphaOnly);
+//    CGContextDrawImage(context, imageRect, [image CGImage]);
+//    CGImageRef mask = CGBitmapContextCreateImage(context);
+//    CGContextRelease(context);
+//
+//    UIImage *outlineImage = [UIImage imageWithCGImage:CGImageCreateWithMask(blackImage, mask) scale:1 orientation:image.imageOrientation];
+//    CGImageRelease(blackImage);
+//    CGImageRelease(mask);
+//
+//    // Return the new grayscale image
+//    return outlineImage;
+//}
+
+
 - (UIImage *)convertImageToGrayScale:(UIImage *)image
 {
-    CGFloat actualWidth = image.size.width;
-    CGFloat actualHeight = image.size.height;
-    CGSize imageSize = CGSizeMake(actualWidth, actualHeight);
-    CGRect imageRect = CGRectMake(0, 0, actualWidth, actualHeight);
-    UIColor *fillColor = [UIColor darkGrayColor];
-
-    UIGraphicsBeginImageContextWithOptions(imageSize, YES, 0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [fillColor setFill];
-    CGContextFillRect(context, imageRect);
-    CGImageRef blackImage = CGBitmapContextCreateImage(context);
-    CGContextRelease(context);
-
-    context = CGBitmapContextCreate(nil, actualWidth, actualHeight, 8, 0, nil, kCGImageAlphaOnly);
+    // Create image rectangle with current image width/height
+    CGRect imageRect = CGRectMake(0, 0, image.size.width, image.size.height);
+    
+    // Grayscale color space
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+    
+    // Create bitmap content with current image size and grayscale colorspace
+    CGContextRef context = CGBitmapContextCreate(nil, image.size.width, image.size.height, 8, 0, colorSpace, kCGImageAlphaNone);
+    
+    // Draw image into current context, with specified rectangle
+    // using previously defined context (with grayscale colorspace)
     CGContextDrawImage(context, imageRect, [image CGImage]);
-    CGImageRef mask = CGBitmapContextCreateImage(context);
+    
+    /* changes start here */
+    // Create bitmap image info from pixel data in current context
+    CGImageRef grayImage = CGBitmapContextCreateImage(context);
+    
+    // release the colorspace and graphics context
+    CGColorSpaceRelease(colorSpace);
     CGContextRelease(context);
-
-    UIImage *outlineImage = [UIImage imageWithCGImage:CGImageCreateWithMask(blackImage, mask) scale:1 orientation:image.imageOrientation];
-    CGImageRelease(blackImage);
+    
+    // make a new alpha-only graphics context
+    context = CGBitmapContextCreate(nil, image.size.width, image.size.height, 8, 0, nil, kCGImageAlphaOnly);
+    
+    // draw image into context with no colorspace
+    CGContextDrawImage(context, imageRect, [image CGImage]);
+    
+    // create alpha bitmap mask from current context
+    CGImageRef mask = CGBitmapContextCreateImage(context);
+    
+    // release graphics context
+    CGContextRelease(context);
+    
+    // make UIImage from grayscale image with alpha mask
+    UIImage *grayScaleImage = [UIImage imageWithCGImage:CGImageCreateWithMask(grayImage, mask) scale:1.0 orientation:image.imageOrientation];
+    
+    // release the CG images
+    CGImageRelease(grayImage);
     CGImageRelease(mask);
     
-    // Return the new grayscale image
-    return outlineImage;
-}
-
-- (UIImage *) convertToGreyscale:(UIImage *)i {
+    // return the new grayscale image
+    return grayScaleImage;
     
-    int kRed = 1;
-    int kGreen = 2;
-    int kBlue = 4;
-    
-    int colors = kGreen | kBlue | kRed;
-    int m_width = i.size.width;
-    int m_height = i.size.height;
-    
-    uint32_t *rgbImage = (uint32_t *) malloc(m_width * m_height * sizeof(uint32_t));
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(rgbImage, m_width, m_height, 8, m_width * 4, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
-    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
-    CGContextSetShouldAntialias(context, NO);
-    CGContextDrawImage(context, CGRectMake(0, 0, m_width, m_height), [i CGImage]);
-    CGContextRelease(context);
-    CGColorSpaceRelease(colorSpace);
-    
-    // now convert to grayscale
-    uint8_t *m_imageData = (uint8_t *) malloc(m_width * m_height);
-    for(int y = 0; y < m_height; y++) {
-        for(int x = 0; x < m_width; x++) {
-            uint32_t rgbPixel=rgbImage[y*m_width+x];
-            uint32_t sum=0,count=0;
-            if (colors & kRed) {sum += (rgbPixel>>24)&255; count++;}
-            if (colors & kGreen) {sum += (rgbPixel>>16)&255; count++;}
-            if (colors & kBlue) {sum += (rgbPixel>>8)&255; count++;}
-            m_imageData[y*m_width+x]=sum/count;
-        }
-    }
-    free(rgbImage);
-    
-    // convert from a gray scale image back into a UIImage
-    uint8_t *result = (uint8_t *) calloc(m_width * m_height *sizeof(uint32_t), 1);
-    
-    // process the image back to rgb
-    for(int i = 0; i < m_height * m_width; i++) {
-        result[i*4]=0;
-        int val=m_imageData[i];
-        result[i*4+1]=val;
-        result[i*4+2]=val;
-        result[i*4+3]=val;
-    }
-    
-    // create a UIImage
-    colorSpace = CGColorSpaceCreateDeviceRGB();
-    context = CGBitmapContextCreate(result, m_width, m_height, 8, m_width * sizeof(uint32_t), colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
-    CGImageRef image = CGBitmapContextCreateImage(context);
-    CGContextRelease(context);
-    CGColorSpaceRelease(colorSpace);
-    UIImage *resultUIImage = [UIImage imageWithCGImage:image];
-    CGImageRelease(image);
-    
-    free(m_imageData);
-    
-    // make sure the data will be released by giving it to an autoreleased NSData
-    [NSData dataWithBytesNoCopy:result length:m_width * m_height];
-    
-    return resultUIImage;
+    /* changes end here */
 }
 
 #pragma mark - API
