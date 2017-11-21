@@ -13,7 +13,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+Additions.h"
 
-@interface TTGameViewController(){
+@interface TTGameViewController()<CLLocationManagerDelegate>  {
     int hours, minutes, seconds;
     int secondsLeft;
 }
@@ -46,6 +46,15 @@
     self.sponsorLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:self.sponsorLabel.font.pointSize];
     self.charityLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:self.charityLabel.font.pointSize];
     
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.distanceFilter = kCLDistanceFilterNone; // Whenever we move
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.delegate = self;
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    [[self locationManager] startUpdatingLocation];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -55,11 +64,6 @@
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.distanceFilter = kCLDistanceFilterNone; // Whenever we move
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [[self locationManager] startUpdatingLocation];
     
     self.motionManager = [[CMMotionManager alloc] init];
     
